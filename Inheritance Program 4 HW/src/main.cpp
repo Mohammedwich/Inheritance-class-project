@@ -39,17 +39,21 @@ int main()
 	getline(cin, fileName);
 
 	std::ifstream fileReader;
-	if(!fileReader.open(fileName))
+	fileReader.open(fileName);
+
+	if(!(fileReader.is_open()) )
 	{
 		cout << "Error occurred while opening file. Exiting..." << endl;
 		return -1;
 	}
 
-//try start
-	try
-	{
+
 		while(getline(fileReader, line))
 		{
+			//try start
+			try
+			{
+
 			//Get rid of commas from string
 			for(auto iter = line.begin(); iter!=line.end(); ++iter)
 			   {
@@ -101,21 +105,25 @@ int main()
 					s >> word;
 					engines = stoi(word);
 
-					std::string::iterator firstWordStart = nullptr;
-					std::string::iterator firstWordEnd = nullptr;
+					std::string::iterator firstWordStart;
+					bool iter1Set = false;
+					std::string::iterator firstWordEnd;
+					bool iter2Set = false;
 
 					//Getting the range of the phrase from the line to initialize a string with said range, so it can be passed to constructor
 					for(auto iter = line.begin(); iter != line.end(); ++iter)
 					{
 						if((*iter) == '"')
 						{
-							if(firstWordStart == nullptr)
+							if(iter1Set == false)
 							{
 								firstWordStart = (iter+1);
+								iter1Set = true;
 							}
-							else if(firstWordEnd == nullptr)
+							else if(iter2Set == false)
 							{
 								firstWordEnd = iter;
+								iter2Set = true;
 							}
 							else
 							{
@@ -140,31 +148,40 @@ int main()
 					s >> word;
 					engines = stoi(word);
 
-					std::string::iterator firstWordStart = nullptr;
-					std::string::iterator firstWordEnd = nullptr;
-					std::string::iterator secondWordStart = nullptr;
-					std::string::iterator secondWordEnd = nullptr;
+					// iterXset are flags to decide which iterator to assign to in the loop below
+					std::string::iterator firstWordStart;
+					bool iter1Set = false;
+					std::string::iterator firstWordEnd;
+					bool iter2Set = false;
+					std::string::iterator secondWordStart;
+					bool iter3Set = false;
+					std::string::iterator secondWordEnd;
+					bool iter4Set = false;
 
 					//Getting the range of the phrases from the line to initialize a string with said range, so it can be passed to constructor
 					for(auto iter = line.begin(); iter != line.end(); ++iter)
 					{
 						if((*iter) == '"')
 						{
-							if(firstWordStart == nullptr)
+							if(iter1Set == false)
 							{
 								firstWordStart = (iter+1);
+								iter1Set = true;
 							}
-							else if(firstWordEnd == nullptr)
+							else if(iter2Set == false)
 							{
 								firstWordEnd = iter;
+								iter2Set = true;
 							}
-							else if(secondWordStart == nullptr)
+							else if(iter3Set == false)
 							{
 								secondWordStart = (iter+1);
+								iter3Set = true;
 							}
-							else if(secondWordEnd == nullptr)
+							else if(iter4Set == false)
 							{
 								secondWordEnd = iter;
+								iter4Set = true;
 							}
 							else
 							{
@@ -191,31 +208,40 @@ int main()
 					s >> word;
 					engines = stoi(word);
 
-					std::string::iterator firstWordStart = nullptr;
-					std::string::iterator firstWordEnd = nullptr;
-					std::string::iterator secondWordStart = nullptr;
-					std::string::iterator secondWordEnd = nullptr;
+					// iterXset are flags to decide which iterator to assign to in the loop below
+					std::string::iterator firstWordStart;
+					bool iter1Set = false;
+					std::string::iterator firstWordEnd;
+					bool iter2Set = false;
+					std::string::iterator secondWordStart;
+					bool iter3Set = false;
+					std::string::iterator secondWordEnd;
+					bool iter4Set = false;
 
 					//Getting the range of the phrases from the line to initialize a string with said range, so it can be passed to constructor
 					for(auto iter = line.begin(); iter != line.end(); ++iter)
 					{
 						if((*iter) == '"')
 						{
-							if(firstWordStart == nullptr)
+							if(iter1Set == false)
 							{
 								firstWordStart = (iter+1);
+								iter1Set = true;
 							}
-							else if(firstWordEnd == nullptr)
+							else if(iter2Set == false)
 							{
 								firstWordEnd = iter;
+								iter2Set = true;
 							}
-							else if(secondWordStart == nullptr)
+							else if(iter3Set == false)
 							{
 								secondWordStart = (iter+1);
+								iter3Set = true;
 							}
-							else if(secondWordEnd == nullptr)
+							else if(iter4Set == false)
 							{
 								secondWordEnd = iter;
+								iter4Set = true;
 							}
 							else
 							{
@@ -284,15 +310,17 @@ int main()
 
 			}
 
+			}
+			catch(...)
+			{
+				cout << "Invalid arguments. Skipping to next line of input..." << endl;
+				continue;
+			}
+			//try block end
 		}
-	}
-	catch(...)
-	{
-		cout << "Invalid arguments. Skipping to next line of input..." << endl;
-		continue;
-	}
-	//try block end
 
+
+	fileReader.close();
 
 	//Free allocated memory
 	for(auto x : planesVector)

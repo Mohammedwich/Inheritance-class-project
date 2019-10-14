@@ -30,14 +30,14 @@ Acrobat::Acrobat(int theNumOfSeats, int theNumOfEngines, std::string theManufact
 
 }
 
-virtual Acrobat::~Acrobat()
+Acrobat::~Acrobat()
 {
 
 }
 
-virtual void Acrobat::printCharacteristics() const
+void Acrobat::printCharacteristics() const
 {
-	cout << "This aircraft has: " << numberOfSeats << " seats. and " << numberOfEngines << " engines." << endl;
+	cout << "This aircraft has: " << getNumberOfSeats() << " seats. and " << getNumberOfEngines() << " engines." << endl;
 	cout << "It was made by " << manufacturer << endl;
 	cout << performance << endl << endl;
 }

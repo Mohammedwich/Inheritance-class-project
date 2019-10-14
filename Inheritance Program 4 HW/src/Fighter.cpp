@@ -30,14 +30,14 @@ Fighter::Fighter(int theNumOfSeats, int theNumOfEngines, std::string theDescript
 
 }
 
-virtual Fighter::~Fighter()
+Fighter::~Fighter()
 {
 
 }
 
-virtual void Fighter::printCharacteristics() const
+void Fighter::printCharacteristics() const
 {
-	cout << "This aircraft has: " << numberOfSeats << " seats. and " << numberOfEngines << " engines." << endl;
+	cout << "This aircraft has: " << getNumberOfSeats() << " seats. and " << getNumberOfEngines() << " engines." << endl;
 	cout << speedAndRangeDescription << endl << endl;
 }
 

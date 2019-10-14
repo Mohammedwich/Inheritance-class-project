@@ -30,17 +30,17 @@ Aircraft::Aircraft(int theNumOfSeats, int theNumOfEngines) : numberOfSeats(theNu
 
 }
 
-virtual Aircraft::~Aircraft()
+Aircraft::~Aircraft()
 {
 
 }
 
-virtual void Aircraft::printCharacteristics() const
+void Aircraft::printCharacteristics() const
 {
 	cout << "This aircraft has: " << numberOfSeats << " seats. and " << numberOfEngines << " engines." << endl << endl;
 }
 
-virtual int Aircraft::ObjectTypeID()
+int Aircraft::ObjectTypeID()
 {
 	return 0;
 }

@@ -30,14 +30,14 @@ Freight::Freight(int theNumOfSeats, int theNumOfEngines, std::string theCompany,
 
 }
 
-virtual Freight::~Freight()
+Freight::~Freight()
 {
 
 }
 
-virtual void Freight::printCharacteristics() const
+void Freight::printCharacteristics() const
 {
-	cout << "This aircraft has: " << numberOfSeats << " seats. and " << numberOfEngines << " engines." << endl;
+	cout << "This aircraft has: " << getNumberOfSeats() << " seats. and " << getNumberOfEngines() << " engines." << endl;
 	cout << "Owned by: " << company << endl;
 	cout << "It can hold " << capacity << endl << endl;
 }
