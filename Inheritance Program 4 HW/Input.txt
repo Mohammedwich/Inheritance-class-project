@@ -1,12 +1,12 @@
 n 0, 6, 2	 	// New Aircraft: 6 seats, 2 engines
 n 0, 200, 4 	// New Aircraft: seats 200, 4 engines
-n 1, 1, 1, "Top Speed: Mach 1.2, Max Range: 400 Miles"
-n 1, 2, 2, "Top Speed: Mach 2, Max Range: 1200 Miles"
-n 2, 1, 2, "Zivko Edge 540", "Cruise: 333 km/h; Max Roll Rate: 420 degrees/sec; G-limit: 10"
-n 2, 2, 3, "Pitts Special S-1S", "180HP; certified S-1C for competition aerobatics"
-n 3, 1, 4, "UPS", "100 UPS Shipping containers"
-n 3, 1, 4, "FedEx", "14000 pounds"
-p 0
-p 1
-p 2
-p 3 
+n 1, 1, 1, "Top Speed: Mach 1.2, Max Range: 400 Miles"	// New Fighter: 1 seat; 1 engine; and a description
+n 1, 2, 2, "Top Speed: Mach 2, Max Range: 1200 Miles"	// New Fighter: 2 seat; 2 engine; and a description
+n 2, 1, 2, "Zivko Edge 540", "Cruise: 333 km/h; Max Roll Rate: 420 degrees/sec; G-limit: 10"	// New Acrobat: 1 seat; 2 engine; and 2 descriptions
+n 2, 2, 3, "Pitts Special S-1S", "180HP; certified S-1C for competition aerobatics"	// New Acrobat: 2 seat; 3 engine; and 2 descriptions
+n 3, 1, 4, "UPS", "100 UPS Shipping containers"	// New Freight: 1 seat; 4 engine; and 2 descriptions
+n 3, 1, 4, "FedEx", "14000 pounds"	// New Freight: 1 seat; 4 engine; and 2 descriptions
+p 0 		// Print details for all objects
+p 1 		// Print details for Fighter objects
+p 2 		// Print details for Acrobat objects
+p 3  		// Print details for Freight objects

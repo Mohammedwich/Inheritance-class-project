@@ -11,7 +11,7 @@
 //
 //Aircraft type ID: 0, Fighter type ID: 1, Aircraft type ID: 2, Aircraft type ID: 3
 //Return codes: -1: Failed to open file, -2: Error while reading file, -3: Error while finding iterator range for string from "line"
-//				-4: Program broke while trying to execute print command.
+//				-4: Program broke while trying to execute print command., -5: Error while checking command type
 //============================================================================
 
 #include "Aircraft.h"
@@ -27,6 +27,16 @@
 using std::cout;
 using std::cin;
 using std::endl;
+
+//Separate a string into words.
+void split(const std::string &theString, char delim, std::vector<std::string> &elems)
+{
+    std::stringstream s(theString);
+    std::string item;
+    while (getline(s, item, delim)) {
+        elems.push_back(item);
+    }
+}
 
 
 int main()
@@ -48,11 +58,11 @@ int main()
 	}
 
 
-		while(getline(fileReader, line))
-		{
-			//try start
-			try
-			{
+	while(getline(fileReader, line))
+	{
+		//try start
+		//debugtry
+		//debug{
 
 			//Get rid of commas from string
 			for(auto iter = line.begin(); iter!=line.end(); ++iter)
@@ -66,11 +76,24 @@ int main()
 			std::string command;
 			int typeToBuildOrPrint;
 			std::string word;
-			std::stringstream s(line);
+			std::vector<std::string> wordsVector;
 
-			s >> command;
-			s >> word;
+			split(line, ' ', wordsVector);
+
+			//debug
+			/*
+			for(auto x : wordsVector)
+			{
+				cout << x << " ";
+			}
+			cout << endl;
+			*/
+
+			command = wordsVector[0];
+			word = wordsVector[1];
 			typeToBuildOrPrint = stoi(word);
+
+			//cout << wordsVector[0] << " " << wordsVector[1]  << " " << endl; // debug
 
 			//check if we need to skip line
 			if (!(command.compare("n") || command.compare("p")) )
@@ -80,17 +103,20 @@ int main()
 			}
 
 
-			if(command.compare("n"))
+			// debug: added == 0
+			if(command.compare("n") == 0)
 			{
 				if(typeToBuildOrPrint == 0)
 				{
 					int seats;
 					int engines;
 
-					s >> word;
+					word = wordsVector[2];
 					seats = stoi(word);
-					s >> word;
+					word = wordsVector[3];
 					engines = stoi(word);
+
+					//cout << "seats: " << seats << "   engines: " << engines << endl; //debug
 
 					planesVector.push_back(new Aircraft(seats, engines));
 				}
@@ -100,10 +126,12 @@ int main()
 					int engines;
 
 
-					s >> word;
+					word = wordsVector[2];
 					seats = stoi(word);
-					s >> word;
+					word = wordsVector[3];
 					engines = stoi(word);
+
+					//cout << "seats: " << seats << "   engines: " << engines << endl; //debug
 
 					std::string::iterator firstWordStart;
 					bool iter1Set = false;
@@ -113,7 +141,7 @@ int main()
 					//Getting the range of the phrase from the line to initialize a string with said range, so it can be passed to constructor
 					for(auto iter = line.begin(); iter != line.end(); ++iter)
 					{
-						if((*iter) == '"')
+						if((*iter) == '\"')
 						{
 							if(iter1Set == false)
 							{
@@ -143,10 +171,12 @@ int main()
 					int seats;
 					int engines;
 
-					s >> word;
+					word = wordsVector[2];
 					seats = stoi(word);
-					s >> word;
+					word = wordsVector[3];
 					engines = stoi(word);
+
+					//cout << "seats: " << seats << "   engines: " << engines << endl; //debug
 
 					// iterXset are flags to decide which iterator to assign to in the loop below
 					std::string::iterator firstWordStart;
@@ -161,7 +191,7 @@ int main()
 					//Getting the range of the phrases from the line to initialize a string with said range, so it can be passed to constructor
 					for(auto iter = line.begin(); iter != line.end(); ++iter)
 					{
-						if((*iter) == '"')
+						if((*iter) == '\"')
 						{
 							if(iter1Set == false)
 							{
@@ -203,10 +233,12 @@ int main()
 					int seats;
 					int engines;
 
-					s >> word;
+					word = wordsVector[2];
 					seats = stoi(word);
-					s >> word;
+					word = wordsVector[3];
 					engines = stoi(word);
+
+					//cout << "seats: " << seats << "   engines: " << engines << endl; //debug
 
 					// iterXset are flags to decide which iterator to assign to in the loop below
 					std::string::iterator firstWordStart;
@@ -221,7 +253,7 @@ int main()
 					//Getting the range of the phrases from the line to initialize a string with said range, so it can be passed to constructor
 					for(auto iter = line.begin(); iter != line.end(); ++iter)
 					{
-						if((*iter) == '"')
+						if((*iter) == '\"')
 						{
 							if(iter1Set == false)
 							{
@@ -263,7 +295,7 @@ int main()
 					return -2;
 				}
 			}
-			else if (command.compare("p"))
+			else if (command.compare("p") == 0)// debug: added == 0
 			{
 				if(typeToBuildOrPrint == 0)
 				{
@@ -309,16 +341,27 @@ int main()
 				}
 
 			}
-
-			}
-			catch(...)
+			else
 			{
-				cout << "Invalid arguments. Skipping to next line of input..." << endl;
-				continue;
+				cout << "Error while checking command type" << endl;
+				return -5;
 			}
-			//try block end
-		}
+	//	}
+	//	catch(...)
+	//	{
+	//		cout << "Invalid arguments. Skipping to next line of input..." << endl;
+	//		continue;
+	//	}
+		//try block end
+	}
 
+	//debug
+	/*
+	for(auto x : planesVector)
+	{
+		x->printCharacteristics();
+	}
+	*/
 
 	fileReader.close();
 

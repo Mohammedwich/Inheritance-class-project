@@ -37,7 +37,7 @@ Acrobat::~Acrobat()
 
 void Acrobat::printCharacteristics() const
 {
-	cout << "This aircraft has: " << getNumberOfSeats() << " seats. and " << getNumberOfEngines() << " engines." << endl;
+	cout << "This Acrobat has: " << getNumberOfSeats() << " seats. and " << getNumberOfEngines() << " engines." << endl;
 	cout << "It was made by " << manufacturer << endl;
 	cout << performance << endl << endl;
 }

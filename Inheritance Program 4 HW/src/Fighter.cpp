@@ -37,7 +37,7 @@ Fighter::~Fighter()
 
 void Fighter::printCharacteristics() const
 {
-	cout << "This aircraft has: " << getNumberOfSeats() << " seats. and " << getNumberOfEngines() << " engines." << endl;
+	cout << "This Fighter has: " << getNumberOfSeats() << " seats. and " << getNumberOfEngines() << " engines." << endl;
 	cout << speedAndRangeDescription << endl << endl;
 }
 

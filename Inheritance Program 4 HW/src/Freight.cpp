@@ -37,7 +37,7 @@ Freight::~Freight()
 
 void Freight::printCharacteristics() const
 {
-	cout << "This aircraft has: " << getNumberOfSeats() << " seats. and " << getNumberOfEngines() << " engines." << endl;
+	cout << "This Freight plane has: " << getNumberOfSeats() << " seats. and " << getNumberOfEngines() << " engines." << endl;
 	cout << "Owned by: " << company << endl;
 	cout << "It can hold " << capacity << endl << endl;
 }
