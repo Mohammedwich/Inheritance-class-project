@@ -28,6 +28,7 @@ public:
 	virtual ~Acrobat();
 
 	virtual void printCharacteristics() const;
+	virtual int ObjectTypeID();
 
 	std::string getManufacturer() const;
 	std::string getPerformance() const;

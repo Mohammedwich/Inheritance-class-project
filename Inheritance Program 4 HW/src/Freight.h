@@ -28,6 +28,7 @@ public:
 	virtual ~Freight();
 
 	virtual void printCharacteristics() const;
+	virtual int ObjectTypeID();
 
 	std::string getCompany() const;
 	std::string getCapacity() const;

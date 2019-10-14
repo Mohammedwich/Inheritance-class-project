@@ -23,6 +23,7 @@ public:
 	virtual ~Aircraft();
 
 	virtual void printCharacteristics() const;
+	virtual int ObjectTypeID();
 
 	int getNumberOfSeats() const;
 	int getNumberOfEngines() const;

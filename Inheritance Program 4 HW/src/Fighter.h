@@ -28,6 +28,7 @@ public:
 	virtual ~Fighter();
 
 	virtual void printCharacteristics() const;
+	virtual int ObjectTypeID();
 
 	std::string getDescription() const;
 

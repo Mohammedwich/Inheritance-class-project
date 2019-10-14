@@ -42,6 +42,11 @@ virtual void Acrobat::printCharacteristics() const
 	cout << performance << endl << endl;
 }
 
+int Acrobat::ObjectTypeID()
+{
+	return 2;
+}
+
 std::string Acrobat::getManufacturer() const
 {
 	return manufacturer;

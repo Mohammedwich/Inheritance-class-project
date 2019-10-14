@@ -42,6 +42,11 @@ virtual void Freight::printCharacteristics() const
 	cout << "It can hold " << capacity << endl << endl;
 }
 
+int Freight::ObjectTypeID()
+{
+	return 3;
+}
+
 std::string Freight::getCompany() const
 {
 	return company;

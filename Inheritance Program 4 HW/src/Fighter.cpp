@@ -41,6 +41,11 @@ virtual void Fighter::printCharacteristics() const
 	cout << speedAndRangeDescription << endl << endl;
 }
 
+int Fighter::ObjectTypeID()
+{
+	return 1;
+}
+
 std::string Fighter::getDescription() const
 {
 	return speedAndRangeDescription;

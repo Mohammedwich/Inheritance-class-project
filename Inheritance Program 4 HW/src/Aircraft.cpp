@@ -40,6 +40,11 @@ virtual void Aircraft::printCharacteristics() const
 	cout << "This aircraft has: " << numberOfSeats << " seats. and " << numberOfEngines << " engines." << endl << endl;
 }
 
+virtual int Aircraft::ObjectTypeID()
+{
+	return 0;
+}
+
 int Aircraft::getNumberOfSeats() const
 {
 	return numberOfSeats;
