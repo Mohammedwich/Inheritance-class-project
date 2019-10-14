@@ -1,17 +1,25 @@
 //============================================================================
-// Name			: File name??????????
+// Name			: main_inheritance_and_polymorphism.cpp
 // Author		: Mohammed Ahmed
 // Course		: UTDallas CS 1337.502 F19
 // Version		: 1.0
 // Copyright	: 2019
 //
 // Description :
+// Aircraft type ID: 0, Fighter type ID: 1, Aircraft type ID: 2, Aircraft type ID: 3
 //
-//		???????????????
+// The program takes an input file with each lines structured like:
+// "command(n for new, p for print characteristics), type ID(0,1,2, or 3), #seats, #engines, description1(if applicable), description2(if applicable)"
+// Descriptions must be in quotations
 //
-//Aircraft type ID: 0, Fighter type ID: 1, Aircraft type ID: 2, Aircraft type ID: 3
-//Return codes: -1: Failed to open file, -2: Error while reading file, -3: Error while finding iterator range for string from "line"
-//				-4: Program broke while trying to execute print command., -5: Error while checking command type
+// n commands will create a plane with the traits mentioned and put it in a vector. p command will call displayCharacteristics()
+// for all planes if typeID: 0; Fighters only if typeID: 1; Acrobats only if typeID: 2; Freights only if typeID: 3
+//
+// lines with invalid commands or typeID's will be skipped. Lines with bad descriptions will create a plane without a description.
+// extra text after the needed information on the same line is ignored
+//
+// Return codes: -1: Failed to open file, -2: Error while reading file, -3: Error while finding iterator range for string from "line"
+//				-5: Error while checking command type
 //============================================================================
 
 #include "Aircraft.h"
@@ -48,6 +56,7 @@ int main()
 	cout << "Enter input file name: " <<endl;
 	getline(cin, fileName);
 
+	//open and check open status
 	std::ifstream fileReader;
 	fileReader.open(fileName);
 
@@ -58,13 +67,15 @@ int main()
 	}
 
 
+	int lineNumber = 0;	//Used for displaying line number of invalid command or object type
 	while(getline(fileReader, line))
 	{
 		//try start
-		//debugtry
-		//debug{
+		try
+		{
+			++lineNumber;
 
-			//Get rid of commas from string
+			//Get rid of commas from string so code can parse words without commas
 			for(auto iter = line.begin(); iter!=line.end(); ++iter)
 			   {
 				   if((*iter)==',')
@@ -73,37 +84,26 @@ int main()
 				   }
 			   }
 
-			std::string command;
-			int typeToBuildOrPrint;
-			std::string word;
-			std::vector<std::string> wordsVector;
+			std::string command;	//will hold the command from the input file
+			int typeToBuildOrPrint;	//will hold the object type ID
+			std::string word;		//will hold a word for processing such as converting to int before assignment
+			std::vector<std::string> wordsVector;	//vector of all the individual words from the current line
 
 			split(line, ' ', wordsVector);
-
-			//debug
-			/*
-			for(auto x : wordsVector)
-			{
-				cout << x << " ";
-			}
-			cout << endl;
-			*/
 
 			command = wordsVector[0];
 			word = wordsVector[1];
 			typeToBuildOrPrint = stoi(word);
 
-			//cout << wordsVector[0] << " " << wordsVector[1]  << " " << endl; // debug
 
 			//check if we need to skip line
-			if (!(command.compare("n") || command.compare("p")) )
+			if (!(command.compare("n") == 0 || command.compare("p") == 0) )
 			{
-				cout << "Invalid command or object type. Skipping line..." << endl;
+				cout << "Invalid command on line " << lineNumber << ". Skipping line..." << endl << endl;
 				continue;
 			}
 
-
-			// debug: added == 0
+			//Build the appropriate plane type
 			if(command.compare("n") == 0)
 			{
 				if(typeToBuildOrPrint == 0)
@@ -115,8 +115,6 @@ int main()
 					seats = stoi(word);
 					word = wordsVector[3];
 					engines = stoi(word);
-
-					//cout << "seats: " << seats << "   engines: " << engines << endl; //debug
 
 					planesVector.push_back(new Aircraft(seats, engines));
 				}
@@ -131,14 +129,13 @@ int main()
 					word = wordsVector[3];
 					engines = stoi(word);
 
-					//cout << "seats: " << seats << "   engines: " << engines << endl; //debug
-
 					std::string::iterator firstWordStart;
 					bool iter1Set = false;
 					std::string::iterator firstWordEnd;
 					bool iter2Set = false;
 
-					//Getting the range of the phrase from the line to initialize a string with said range, so it can be passed to constructor
+					//Getting the range of the phrase from the line to initialize a string with said range,
+					//so it can be passed to constructor
 					for(auto iter = line.begin(); iter != line.end(); ++iter)
 					{
 						if((*iter) == '\"')
@@ -176,8 +173,6 @@ int main()
 					word = wordsVector[3];
 					engines = stoi(word);
 
-					//cout << "seats: " << seats << "   engines: " << engines << endl; //debug
-
 					// iterXset are flags to decide which iterator to assign to in the loop below
 					std::string::iterator firstWordStart;
 					bool iter1Set = false;
@@ -188,7 +183,8 @@ int main()
 					std::string::iterator secondWordEnd;
 					bool iter4Set = false;
 
-					//Getting the range of the phrases from the line to initialize a string with said range, so it can be passed to constructor
+					//Getting the range of the phrases from the line to initialize a string with said range,
+					//so it can be passed to constructor
 					for(auto iter = line.begin(); iter != line.end(); ++iter)
 					{
 						if((*iter) == '\"')
@@ -238,8 +234,6 @@ int main()
 					word = wordsVector[3];
 					engines = stoi(word);
 
-					//cout << "seats: " << seats << "   engines: " << engines << endl; //debug
-
 					// iterXset are flags to decide which iterator to assign to in the loop below
 					std::string::iterator firstWordStart;
 					bool iter1Set = false;
@@ -250,7 +244,8 @@ int main()
 					std::string::iterator secondWordEnd;
 					bool iter4Set = false;
 
-					//Getting the range of the phrases from the line to initialize a string with said range, so it can be passed to constructor
+					//Getting the range of the phrases from the line to initialize a string with said range,
+					//so it can be passed to constructor
 					for(auto iter = line.begin(); iter != line.end(); ++iter)
 					{
 						if((*iter) == '\"')
@@ -295,8 +290,9 @@ int main()
 					return -2;
 				}
 			}
-			else if (command.compare("p") == 0)// debug: added == 0
+			else if (command.compare("p") == 0)
 			{
+				//Checking which planes need to be displayed
 				if(typeToBuildOrPrint == 0)
 				{
 					for(auto iter = planesVector.begin(); iter != planesVector.end(); ++iter)
@@ -336,32 +332,25 @@ int main()
 				}
 				else
 				{
-					cout << "Program broke while trying to execute print command" << endl;
-					return -4;
+					cout << "Invalid object type on line " << lineNumber << ". Skipping line..." << endl << endl;
+					continue;
 				}
 
 			}
 			else
 			{
-				cout << "Error while checking command type" << endl;
+				cout << "Error while checking command type. Exiting..." << endl;
 				return -5;
 			}
-	//	}
-	//	catch(...)
-	//	{
-	//		cout << "Invalid arguments. Skipping to next line of input..." << endl;
-	//		continue;
-	//	}
+		}
+		catch(...)	// Catch any unforeseen issues not accounted for in a line and skips that line
+		{
+			cout << "Invalid arguments. Skipping to next line of input..." << endl << endl;
+			continue;
+		}
 		//try block end
 	}
 
-	//debug
-	/*
-	for(auto x : planesVector)
-	{
-		x->printCharacteristics();
-	}
-	*/
 
 	fileReader.close();
 
